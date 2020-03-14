@@ -1,0 +1,352 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "E-Commerce",
+    "description": "E-Commerce",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+  "/user/register": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Create a New User in System",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {}     
+     
+      }
+    },
+
+    "/user/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Login in E-Commerce",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/User_login"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {}     
+     
+      }
+    },
+
+    "/admin/login": {
+      "post": {
+        "tags": [
+          "Admin Panel"
+        ],
+        "description": "Login in E-Commerce",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Admin_login"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {}     
+     
+      }
+    },
+
+
+  "/category/add": {
+    "post": {
+      "tags": [
+        "E-Commerce Category's"
+      ],
+      "description": "Create new Category in E-Commerce",
+      "parameters": [
+        {
+          "name": "user",
+          "in": "body",
+          "description": "User that we want to create",
+          "schema": {
+            "$ref": "#/definitions/addCategory"
+          }
+        },
+        {
+          "name": "authorization",
+          "in": "header",
+          "required":true
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {}     
+   
+    }
+  },
+  
+  "/category/list": {
+    "get": {
+      "tags": [
+        "E-Commerce Category's"
+      ],
+      "description": "List Category in E-Commerce",
+      "parameters": [
+   
+        {
+          "name": "authorization",
+          "in": "header",
+          "required":true
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {}     
+    }
+  },
+
+  "/product/add": {
+    "post": {
+      "tags": [
+        "E-Commerce Products"
+      ],
+      "description": "Products in E-Commerce",
+      "produces":["multipart/form-data"],
+      "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "required":true
+        },
+        {
+          "name": "name",
+          "in": "formData",
+          "type": "string"
+        },
+        {
+          "name": "price",
+          "in": "formData",
+          "type": "number"
+        },
+        {
+          "name": "opening_stock",
+          "in": "formData",
+          "type": "number"
+        },
+        {
+          "name": "stock",
+          "in": "formData",
+          "type": "number"
+        },
+        {
+          "name": "price",
+          "in": "formData",
+          "type": "number"
+        },
+        {
+          "name": "image",
+          "in": "formData",
+          "type": "file"
+        },
+        {
+          "name": "product_id",
+          "in": "formData",
+          "type": "string"
+        }
+        
+      ],
+      "responses": {}     
+    }
+    },
+
+    "/cart/add": {
+      "post": {
+        "tags": [
+          "E-Commerce Cart's"
+        ],
+        "description": "Carts in E-Commerce",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Cart's we want to Add",
+            "schema": {
+              "$ref": "#/definitions/addCart"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required":true
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {}     
+      }
+      },
+
+
+      "/cart/view": {
+        "get": {
+          "tags": [
+            "E-Commerce Cart's"
+          ],
+          "description": "List Carts in E-Commerce",
+          "parameters": [
+
+            {
+              "name": "authorization",
+              "in": "header",
+              "required":true
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {}     
+        }
+        }    
+
+},
+
+  "definitions": { 
+    "User": {
+      "required": ["name","email","password","phone"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "number"
+        }
+      }
+    },
+
+
+    "User_login": {
+      "required": ["email","password"],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+
+    
+    "Admin_login": {
+      "required": ["email","password"],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+
+    "addCategory": {
+      "required": ["category_name"],
+      "properties": {
+        "category_name": {
+          "type": "string"
+        }
+    }
+  },    
+
+    "addProduct": {
+      "required": ["name","price","opening_stock","stock","price"],
+      "properties": {
+        "name": {
+        "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "opening_stock": {
+          "type": "string"
+        },
+        "stock": {
+          "type": "string"
+          },
+        "product_id": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "image": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+
+    "addCart": {
+      "required": ["product_id","quantity","user_id"],
+      "properties": {
+        "product_id": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "quantity": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    }
+
+  }
+}
+
